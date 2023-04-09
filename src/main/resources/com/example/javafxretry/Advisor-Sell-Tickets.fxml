@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: fff88c;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxretry.HelloController">
+    <children>
+        <ImageView fitHeight="154.0" fitWidth="159.0" layoutX="1104.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@data\Advisor Icon.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="1108.0" layoutY="184.0" prefWidth="146.0" text="Advisor Control Panel">
+            <font>
+                <Font name="System Bold" size="13.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="154.0" fitWidth="154.0" layoutX="1104.0" layoutY="551.0" preserveRatio="true">
+            <image>
+                <Image url="@\data\AirVia Ltd.png" />
+            </image>
+        </ImageView>
+        <Accordion>
+            <panes>
+                <TitledPane prefWidth="202.0">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="719.0" prefWidth="200.0">
+                            <children>
+                                <Text layoutX="-1.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, Advisor!" textAlignment="CENTER" wrappingWidth="202.0">
+                                    <font>
+                                        <Font size="22.0" />
+                                    </font>
+                                </Text>
+                                <Button layoutX="-1.0" layoutY="69.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="202.0" text="Sell Ticket">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Button>
+                                <Button layoutX="-1.0" layoutY="121.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="202.0" text="Cancel Ticket">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Button>
+                                <Button layoutX="-1.0" layoutY="174.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="202.0" text="Create Customer">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Button>
+                                <Button layoutX="-1.0" layoutY="226.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="202.0" text="Publish Self Report">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Button>
+                                <Button layoutX="-1.0" layoutY="279.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="202.0" text="View Past Reports">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Button>
+                                <Button layoutX="-1.0" layoutY="618.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="202.0" text="LOG OUT">
+                                    <font>
+                                        <Font size="36.0" />
+                                    </font>
+                                    <textFill>
+                                        <RadialGradient centerX="0.5" centerY="0.5" radius="1.0">
+                                            <stops>
+                                                <Stop>
+                                                    <color>
+                                                        <Color red="1.0" />
+                                                    </color>
+                                                </Stop>
+                                                <Stop offset="0.006711409395973154">
+                                                    <color>
+                                                        <Color red="1.0" />
+                                                    </color>
+                                                </Stop>
+                                                <Stop offset="1.0">
+                                                    <color>
+                                                        <Color />
+                                                    </color>
+                                                </Stop>
+                                            </stops>
+                                        </RadialGradient>
+                                    </textFill>
+                                </Button>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </TitledPane>
+            </panes>
+        </Accordion>
+      <Text layoutX="246.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer ID:">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="246.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price:">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="247.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date:">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="249.0" layoutY="409.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To Location:">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="249.0" layoutY="478.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seat Location:">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <TextField fx:id="Advisor_Customer_ID" layoutX="246.0" layoutY="195.0" prefHeight="25.0" prefWidth="351.0" />
+      <TextField fx:id="Advisor_Amount" layoutX="246.0" layoutY="271.0" prefHeight="25.0" prefWidth="351.0" />
+      <TextField fx:id="Advisor_Date_Purchased" layoutX="246.0" layoutY="350.0" prefHeight="25.0" prefWidth="351.0" />
+      <TextField fx:id="Advisor_To_Loaction" layoutX="246.0" layoutY="416.0" prefHeight="25.0" prefWidth="351.0" />
+      <TextField fx:id="Advisor_Seat_Location" layoutX="246.0" layoutY="485.0" prefHeight="25.0" prefWidth="351.0" />
+      <Text layoutX="684.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Blank ID:">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="684.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Currency Purchased:">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="685.0" layoutY="336.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From Location:">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="687.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Merchant ID:">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <TextField fx:id="Advisor_Blank_ID" layoutX="684.0" layoutY="196.0" prefHeight="25.0" prefWidth="351.0" />
+      <TextField fx:id="Advisor_Currency_Purchased" layoutX="684.0" layoutY="272.0" prefHeight="25.0" prefWidth="351.0" />
+      <TextField fx:id="Advisor_From_Location" layoutX="687.0" layoutY="351.0" prefHeight="25.0" prefWidth="351.0" />
+      <TextField fx:id="Advisor_Merchant_ID" layoutX="684.0" layoutY="417.0" prefHeight="25.0" prefWidth="351.0" />
+      <Button fx:id="Advisor_Sell_Ticket_Button" layoutX="688.0" layoutY="519.0" mnemonicParsing="false" onAction="#Advisor_Sell_Ticket" prefHeight="81.0" prefWidth="178.0" text="Sell Ticket">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Button>
+      <Button fx:id="Advisor_Sell_Ticket" layoutX="901.0" layoutY="519.0" mnemonicParsing="false" onAction="#Advisor_Cancel" prefHeight="81.0" prefWidth="178.0" text="Cancel">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Button>
+      <Text layoutX="551.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sell Tickets" wrappingWidth="178.0">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Text>
+    </children>
+</AnchorPane>
