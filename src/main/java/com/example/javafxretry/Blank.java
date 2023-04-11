@@ -1,10 +1,6 @@
 package com.example.javafxretry;
 
-import com.mysql.jdbc.Connection;
-
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Random;
 public class Blank {
     private String[] Coupon_IDs;
@@ -15,12 +11,26 @@ public class Blank {
     //-- Constructor -----------------------------------------------------------------------------------------------------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    Blank(String[] Coupon_IDs_Entered){
+    Blank(String[] Coupon_IDs_Entered) throws SQLException {
 
         //Add SQL injection validation
         Set_Coupon_IDs(Coupon_IDs_Entered);
         Set_Blank_ID();
         Valid = true;
+
+        try{
+            String Query = "INSERT INTO Blanks (Blank_ID, Valid, Discount1_ID, Discount2_ID, Discount3_ID, Discount4_ID) VALUES (\""+Blank_ID+"\", \"1\", \""+Coupon_IDs_Entered[0]+"\", \""+Coupon_IDs_Entered[1]+"\", \""+Coupon_IDs_Entered[2]+"\", \""+Coupon_IDs_Entered[3]+"\");";
+            System.out.println("1");
+            Connection con = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29", "in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
+            System.out.println("2");
+            Statement s = con.createStatement();
+            System.out.println("3");
+            ResultSet rs = s.executeQuery(Query);
+            System.out.println("4");
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
     }
 
     //--------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -37,30 +47,15 @@ public class Blank {
         }
     }
 
-    void Set_Blank_ID(){
+    void Set_Blank_ID() throws SQLException {
         boolean ID_Set = true;
         char[] Characters = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j',
                 'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',};
 
-        while (ID_Set){
-
-            Random temp1 = new Random();
-            int Amount_Of_Charcters = temp1.nextInt(10);
-            while (Amount_Of_Charcters > 3){
-                Amount_Of_Charcters = temp1.nextInt(10);
-            }
-
-            String ID = "";
-            Random temp2 = new Random();
-            int Letter = temp2.nextInt(52);
-            for(int k = 0; k < Amount_Of_Charcters; k++){
-                ID = ID + Characters[Letter];
-            }
-
-            if (!Is_ID_Valid(ID)){
-                Blank_ID = ID;
-                ID_Set = false;
-            }
+        for (int i = 0; i < 8; i++){
+            Random r = new Random();
+            int character = r.nextInt(52);
+            Blank_ID = Blank_ID + Characters[character];
         }
     }
 
