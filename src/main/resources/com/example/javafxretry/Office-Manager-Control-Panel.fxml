@@ -108,5 +108,27 @@
             <Image url="@../../../../java/data/Office%20Manager%20Icon.png" />
          </image>
       </ImageView>
+      <Button fx:id="Manager_Get_Blank_Data_Button" layoutX="533.0" layoutY="514.0" mnemonicParsing="false" onAction="#Manager_Get_Blank_Data" text="Get Blank Data">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="Manager_Get_Account_Data_Button" layoutX="272.0" layoutY="514.0" mnemonicParsing="false" onAction="#Manager_Get_Account_Data" text="Get Account Data">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="Manager_Get_Ticket_Data_Button" layoutX="759.0" layoutY="514.0" mnemonicParsing="false" onAction="#Manager_Get_Ticket_Data" text="Get Ticket Data">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="Manager_Get_Customer_Data_Button" layoutX="996.0" layoutY="514.0" mnemonicParsing="false" onAction="#Manager_Get_Customer_Data" text="Get Customer Data">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Label layoutX="709.0" layoutY="195.0" text="Data" textAlignment="CENTER" visible="false" />
+      <Label fx:id="Manager_Data_Output" layoutX="626.0" layoutY="119.0" text="Label" visible="false" />
    </children>
 </AnchorPane>

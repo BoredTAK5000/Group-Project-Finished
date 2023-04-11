@@ -41,7 +41,7 @@
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Button layoutX="-1.0" layoutY="121.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="202.0" text="Backup System">
+                        <Button fx:id="Admin_Go_To_Backup_System_Button" layoutX="-1.0" layoutY="121.0" mnemonicParsing="false" onAction="#Admin_Go_To_Backup_System" prefHeight="33.0" prefWidth="202.0" text="Backup System">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -51,7 +51,7 @@
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Button layoutX="-1.0" layoutY="224.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="202.0" text="Manage Tickets">
+                        <Button fx:id="Admin_Go_To_Manage_Tickets_Button" layoutX="-1.0" layoutY="224.0" mnemonicParsing="false" onAction="#Admin_Go_To_Manage_Tickets" prefHeight="33.0" prefWidth="202.0" text="Manage Tickets">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -82,7 +82,7 @@
                               </RadialGradient>
                            </textFill>
                         </Button>
-                        <Button layoutX="-1.0" layoutY="281.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="202.0" text="Manage Reports">
+                        <Button fx:id="Admin_Go_To_Manage_Reports_Button" layoutX="-1.0" layoutY="281.0" mnemonicParsing="false" onAction="#Admin_Go_To_Manage_Reports" prefHeight="33.0" prefWidth="202.0" text="Manage Reports">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -98,5 +98,26 @@
             <Image url="@../../../../java/data/System%20Admin%20Icon.png" />
          </image>
       </ImageView>
+      <Button fx:id="Admin_Get_Account_Data_Button" layoutX="282.0" layoutY="524.0" mnemonicParsing="false" onAction="#Admin_Get_Account_Data" text="Get Account Data">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="Admin_Get_Blank_Data_Button" layoutX="543.0" layoutY="524.0" mnemonicParsing="false" onAction="#Admin_Get_Blank_Data" text="Get Blank Data">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="Admin_Get_Ticket_Data_Button" layoutX="769.0" layoutY="524.0" mnemonicParsing="false" onAction="#Admin_Get_Ticket_Data" text="Get Ticket Data">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="Admin_Get_Customer_Data_Button" layoutX="1006.0" layoutY="524.0" mnemonicParsing="false" onAction="#Admin_Get_Customer_Data" text="Get Customer Data">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Label fx:id="Admin_Data_Output" layoutX="624.0" layoutY="107.0" text="Label" visible="false" />
    </children>
 </AnchorPane>
