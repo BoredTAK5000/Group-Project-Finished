@@ -1116,7 +1116,7 @@ public class HelloController {
 
     boolean Check_SQL_Injection(String[] string){
         for (int i = 0; i < string.length; i++){
-            if (string[i].toUpperCase().contains("INSERT") || string[i].toUpperCase().contains("SELECT") || string[i].toUpperCase().contains("DROP") || string[i].toUpperCase().contains("UPDATE")){
+            if (string[i].toUpperCase().contains("INSERT") || string[i].toUpperCase().contains("SELECT") || string[i].toUpperCase().contains("DROP") || string[i].toUpperCase().contains("UPDATE") || string[i].toUpperCase().contains("\n")){
                 return false;
             }
         }
