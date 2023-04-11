@@ -2377,18 +2377,24 @@ void Change_Role_Actual(String ID, String Password, String Username, String New_
     }
 
     String Get_Ticket_Data() throws SQLException {
-        String Query = "SELECT * FROM Ticket;";
-        Connection con = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
-        Statement s = con.createStatement();
-        ResultSet rs = s.executeQuery(Query);
 
-        String Data = "";
+        try {
+            String Query = "SELECT * FROM Tickets;";
+            Connection con = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery(Query);
 
-        while(rs.next()){
-            Data = Data + rs.getString("Ticket_ID") +" | "+ rs.getString("Currency_Purchesed") +" | " + rs.getString("Amount") +" | " + rs.getString("Date_Purchased") +" | " +rs.getString("Customer_Purchased_ID") +" | " +rs.getString("To_Location") +" | " +rs.getString("From_Location") +" | " +rs.getString("Seller_ID") +" | " +rs.getString("Seat_Location") +" | " +rs.getString("Blank") +" | " +rs.getString("Valid")+ "\n"; // the data from the table
+            String Data = "";
+
+            while(rs.next()){
+                Data = Data + rs.getString("Ticket_ID") +" | "+ rs.getString("Currency_Purchesed") +" | " + rs.getString("Amount") +" | " + rs.getString("Date_Purchased") +" | " +rs.getString("Customer_Purchased_ID") +" | " +rs.getString("To_Location") +" | " +rs.getString("From_Location") +" | " +rs.getString("Seller_ID") +" | " +rs.getString("Seat_Location") +" | " +rs.getString("Blank") +" | " +rs.getString("Valid")+ "\n"; // the data from the table
+            }
+            return Data;
         }
-
-        return Data;
+        catch (Exception e){
+            System.out.println("Something went wrong");
+            return "";
+        }
     }
 
     String Get_Customer_Data() throws SQLException {
