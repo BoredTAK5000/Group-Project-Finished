@@ -883,7 +883,7 @@ public class HelloController {
     void Log_In(ActionEvent event) throws IOException { // Log in button
         String Username = Username_Entered.getText();
         String Password = Password_Entered.getText();
-        String Role = Role_Entered.getText();
+        String Role = Role_Entered.getText().toUpperCase();
 
         if ((Username.toUpperCase().contains("INSERT") || Password.toUpperCase().contains("INSERT") || Role.toUpperCase().contains("INSERT")) || (Username.toUpperCase().contains("SELECT") || Password.toUpperCase().contains("SELECT") || Role.toUpperCase().contains("SELECT"))) { //protection from SQL injections
             Warning_Message.setVisible(true);
