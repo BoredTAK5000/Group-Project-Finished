@@ -1583,7 +1583,8 @@ void Change_Role_Actual(String ID, String Password, String Username, String New_
                 Query = "DELETE FROM account WHERE ID = \""+ID+"\";";
                 Connection con1 = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
                 Statement s1 = con1.createStatement();
-                ResultSet rs1 = s1.executeQuery(Query);
+                s1.executeUpdate(Query);
+                //ResultSet rs1 = s1.executeQuery(Query);
             }
         }
         else{
@@ -1708,7 +1709,8 @@ void Change_Role_Actual(String ID, String Password, String Username, String New_
             Query = "DELETE FROM Customer WHERE ID = \""+ID+"\";";
             Connection con1 = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
             Statement s1 = con1.createStatement();
-            ResultSet rs1 = s1.executeQuery(Query);
+            s1.executeUpdate(Query);
+            //ResultSet rs1 = s1.executeQuery(Query);
         }
     }
 
@@ -1737,7 +1739,7 @@ void Change_Role_Actual(String ID, String Password, String Username, String New_
 
         if (Check_SQL_Injection(Data)){
             if (valid){
-                String Query = "DELETE FROM Customer WHERE ID = \""+ID+"\";";
+                String Query = "SELECT * FROM Customer WHERE ID = \""+ID+"\";";
                 Connection con = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
                 Statement s = con.createStatement();
                 ResultSet rs = s.executeQuery(Query);
