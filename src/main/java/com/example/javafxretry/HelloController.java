@@ -1903,7 +1903,7 @@ void Change_Role_Actual(String ID, String Password, String Username, String New_
         Statement s = con.createStatement();
         ResultSet rs = s.executeQuery(Query);
         while(rs.next()){
-            String Query1 = "INSERT INTO Account_Backup (Ticket_ID, Currency_Purchesed, Amount, Date_Purchased, Customer_Purchased_ID, To_Location, From_Location, Seller_ID, Seat_Location, Blank, Valid) VALUES (\""+rs.getString("Ticket_ID")+"\", \""+rs.getString("Currency_Purchesed")+"\", \""+rs.getString("Amount")+"\", \""+rs.getString("Date_Purchased")+"\", \""+rs.getString("Customer_Purchased_ID")+"\", \""+rs.getString("To_Location")+"\", \""+rs.getString("From_Location")+"\", \""+rs.getString("Seller_ID")+"\", \""+rs.getString("Seat_Location")+"\", \""+rs.getString("Blank")+"\", \""+rs.getString("Valid")+"\");";
+            String Query1 = "INSERT INTO Account_Backup (ID, Username, Password, Role, Full_Name, telephone, Blanks_To_Give, Agency) VALUES (\""+rs.getString("ID")+"\", \""+rs.getString("Username")+"\", \""+rs.getString("Password")+"\", \""+rs.getString("Role")+"\", \""+rs.getString("Full_Name")+"\", \""+rs.getString("telephone")+"\", \""+rs.getString("Blanks_To_Give")+"\", \""+rs.getString("Agency")+"\");";
             Connection con1 = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
             Statement s1 = con1.createStatement();
             s1.executeUpdate(Query1);
@@ -1936,7 +1936,7 @@ void Change_Role_Actual(String ID, String Password, String Username, String New_
         Statement s4 = con4.createStatement();
         ResultSet rs4 = s4.executeQuery(Query);
         while(rs4.next()){
-            String Query1 = "INSERT INTO Tickets_Backup (Ticket_ID, Currency_Purchesed, Amount, Date_Purchased, Customer_Purchased_ID, To_Location, From_Location, Seller_ID, Seat_Location, Blank, Valid) VALUES (\""+rs4.getString("Ticket_ID")+"\", \""+rs4.getString("Currency_Purchesed")+"\", \""+rs4.getString("Amount")+"\", \""+rs4.getString("Date_Purchased")+"\", \""+rs4.getString("Customer_Purchased_ID")+"\", \""+rs4.getString("To_Location")+"\", \""+rs4.getString("From_Location")+"\", \""+rs4.getString("Seller_ID")+"\", \""+rs4.getString("Seat_Location")+"\", \""+rs4.getString("Blank")+"\", \""+rs4.getString("Valid")+"\");";
+            String Query1 = "INSERT INTO Tickets_Backup (Ticket_ID, Currency_Purchased, Amount, Date_Purchased, Customer_Purchased_ID, To_Location, From_Location, Seller_ID, Seat_Location, Blank, Valid) VALUES (\""+rs4.getString("Ticket_ID")+"\", \""+rs4.getString("Currency_Purchesed")+"\", \""+rs4.getString("Amount")+"\", \""+rs4.getString("Date_Purchased")+"\", \""+rs4.getString("Customer_Purchased_ID")+"\", \""+rs4.getString("To_Location")+"\", \""+rs4.getString("From_Location")+"\", \""+rs4.getString("Seller_ID")+"\", \""+rs4.getString("Seat_Location")+"\", \""+rs4.getString("Blank")+"\", \""+rs4.getString("Valid")+"\");";
             Connection con1 = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
             Statement s1 = con1.createStatement();
             s1.executeUpdate(Query1);
