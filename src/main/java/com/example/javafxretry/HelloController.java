@@ -2479,4 +2479,10 @@ void Change_Role_Actual(String ID, String Password, String Username, String New_
         String file = "System-Admin-Manage-Tickets-Void-Ticket.fxml";
         Change_Scene(event, file);
     }
+
+    @FXML
+    void Manager_Go_To_Manage_Accounts(ActionEvent event) throws IOException {
+        String file = "Office-Manager-Manage-Accounts.fxml";
+        Change_Scene(event, file);
+    }
 }
