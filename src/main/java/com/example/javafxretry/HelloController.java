@@ -962,7 +962,6 @@ public class HelloController {
     void Go_To_Allocate_Blanks(ActionEvent event) throws IOException { // Make the page they visit depend on their role
         String file = "System-Admin-Manage-Blanks-Allocate-Blanks.fxml";
         Change_Scene(event, file);
-
     }
 
     @FXML
@@ -984,7 +983,8 @@ public class HelloController {
                 }
                 else{
                     Query = "UPDATE Blanks SET Valid = '0' where Blank_ID = \"" + Blank_ID +"\"";
-                    rs = s.executeQuery(Query);
+                    s.executeUpdate(Query);
+                    //rs = s.executeQuery(Query);
                 }
             }
             catch (Exception e){
@@ -1043,11 +1043,13 @@ public class HelloController {
             if (Recever_ID_Exists && Blank_ID_Exists) {
                 if (rs2.getString("Blanks_To_Give").equals("")) {
                     String Query3 = "UPDATE account SET Blanks_To_Give = \"" + Recever_ID + "\"";
-                    s.executeQuery(Query3);
+                    s.executeUpdate(Query3);
+                    //ResultSet rs = s.executeQuery(Query3);
                 } else {
                     String Previous_Blanks = rs2.getString("Blanks_To_Give");
                     String Query3 = "UPDATE account SET Blanks_To_Give = \"" + Previous_Blanks + Blank_ID + "\"";
-                    s.executeQuery(Query3);
+                    s.executeUpdate(Query3);
+                    //ResultSet rs = s.executeQuery(Query3);
                 }
             }
         } catch (Exception e) {
@@ -1214,7 +1216,8 @@ public class HelloController {
                 String Query = "UPDATE Tickets SET Valid = \"1\" WHERE Ticket_ID = \""+Ticket_ID+"\"";
                 Connection con = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29", "in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
                 Statement s = con.createStatement();
-                ResultSet rs = s.executeQuery(Query);
+                s.executeUpdate(Query);
+                //ResultSet rs = s.executeQuery(Query);
             }
             else{
                 // Display error message
@@ -1251,7 +1254,8 @@ public class HelloController {
                 String Query = "UPDATE Tickets SET Valid = \"0\" WHERE Ticket_ID = \""+Ticket_ID+"\"";
                 Connection con = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29", "in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
                 Statement s = con.createStatement();
-                ResultSet rs = s.executeQuery(Query);
+                s.executeUpdate(Query);
+                //ResultSet rs = s.executeQuery(Query);
             }
             else{
                 // Display error message
@@ -1319,7 +1323,8 @@ public class HelloController {
                     String Query1 = "UPDATE account SET Username = \" "+New_Username+"\" WHERE ID = \""+Account_ID+"\"";
                     Connection con1 = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29", "in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
                     Statement s1 = con1.createStatement();
-                    ResultSet rs1 = s1.executeQuery(Query1);
+                    s.executeUpdate(Query1);
+                    //ResultSet rs = s.executeQuery(Query);
                 }
                 else{
                     //Display Message
@@ -1371,7 +1376,8 @@ public class HelloController {
                 String Query = "UPDATE account SET Password = \""+New_Password1+" \" WHERE ID =\""+ID+"\"";
                 Connection con = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
                 Statement s = con.createStatement();
-                ResultSet rs = s.executeQuery(Query);
+                s.executeUpdate(Query);
+                //ResultSet rs = s.executeQuery(Query);
             }
             else{
                 //Display message
@@ -1420,7 +1426,8 @@ void Change_Role_Actual(String ID, String Password, String Username, String New_
             String Query = "UPDATE account SET Role = \""+New_Role+" \" WHERE ID =\""+ID+"\"";
             Connection con = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
             Statement s = con.createStatement();
-            ResultSet rs = s.executeQuery(Query);
+            s.executeUpdate(Query);
+            //ResultSet rs = s.executeQuery(Query);
         }
         else{
             //Display message
@@ -1714,7 +1721,8 @@ void Change_Role_Actual(String ID, String Password, String Username, String New_
                     System.out.println(Query);
                     Connection con1 = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
                     Statement s1 = con1.createStatement();
-                    ResultSet rs1 = s1.executeQuery(Query);
+                    s.executeUpdate(Query);
+                    //ResultSet rs1 = s.executeQuery(Query);
                 }
             }
         }
@@ -1763,7 +1771,8 @@ void Change_Role_Actual(String ID, String Password, String Username, String New_
                     Query = "UPDATE Customer SET Discount \""+Discount+"\", Flex_Or_Fixed = \""+Flex_Or_Fixed+"\" WHERE ID = \""+ID+"\";";
                     Connection con1 = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
                     Statement s1 = con1.createStatement();
-                    ResultSet rs1 = s1.executeQuery(Query);
+                    s.executeUpdate(Query);
+                    //ResultSet rs1 = s1.executeQuery(Query);
                 }
             }
         }
