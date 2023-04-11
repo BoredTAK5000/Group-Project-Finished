@@ -155,6 +155,23 @@ public class HelloController {
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     //-- Control Panel buttons ---------------------------------------------------------------------------------------------------------------------------------------
+
+
+    @FXML
+    private Label Manager_Data_Output;
+
+    @FXML
+    private Button Manager_Get_Account_Data_Button;
+
+    @FXML
+    private Button Manager_Get_Blank_Data_Button;
+
+    @FXML
+    private Button Manager_Get_Customer_Data_Button;
+
+    @FXML
+    private Button Manager_Get_Ticket_Data_Button;
+
     @FXML
     private Button Manager_Go_To_Cancel_Ticket_Button;
 
@@ -529,7 +546,31 @@ public class HelloController {
 
     //-- Control Panel ------------------------------------------------------------------------------------------------------------------------------------------------
     @FXML
+    private Label Admin_Data_Output;
+
+    @FXML
+    private Button Admin_Get_Account_Data_Button;
+
+    @FXML
+    private Button Admin_Get_Blank_Data_Button;
+
+    @FXML
+    private Button Admin_Get_Customer_Data_Button;
+
+    @FXML
+    private Button Admin_Get_Ticket_Data_Button;
+
+    @FXML
     private Button Manage_Blanks_Button;
+
+    @FXML
+    private Button Admin_Go_To_Manage_Reports_Button;
+
+    @FXML
+    private Button Admin_Go_To_Manage_Tickets_Button;
+
+    @FXML
+    private Button Admin_Go_To_Backup_System_Button;
 
     @FXML
     private Button Admin_Go_To_Manage_Accounts_Button;
@@ -1033,9 +1074,9 @@ public class HelloController {
     }
 
     @FXML
-    void Create_Blank(ActionEvent event) {
+    void Create_Blank(ActionEvent event) throws SQLException {
         boolean valid = true;
-        if (Admin_Discount_ID_1.getText().length() != 8 || Admin_Discount_ID_2.getText().length() != 8 || Admin_Discount_ID_3.getText().length() != 8 || Admin_Discount_ID_4.getText().length() != 8){
+        if ((Admin_Discount_ID_1.getText().length() > 11 || Admin_Discount_ID_1.getText().length() < 9) || (Admin_Discount_ID_2.getText().length() < 9 || Admin_Discount_ID_2.getText().length() > 11) || (Admin_Discount_ID_3.getText().length() < 9 || Admin_Discount_ID_3.getText().length() > 11) || (Admin_Discount_ID_4.getText().length() < 9 || Admin_Discount_ID_4.getText().length() > 11)){
             valid = false;
         }
         if (Admin_Discount_ID_1.getText().toUpperCase().contains("INSERT") || Admin_Discount_ID_1.getText().toUpperCase().contains("SELECT") || Admin_Discount_ID_1.getText().toUpperCase().contains("UPDATE") || Admin_Discount_ID_1.getText().toUpperCase().contains("DROP")){
@@ -1053,7 +1094,12 @@ public class HelloController {
 
         String[] Discount_IDs = {Admin_Discount_ID_1.getText(), Admin_Discount_ID_2.getText(), Admin_Discount_ID_3.getText(), Admin_Discount_ID_4.getText()};
         if (valid){
-            Blank blank = new Blank(Discount_IDs);
+            try{
+                Blank blank = new Blank(Discount_IDs);
+            }
+            catch(Exception e){
+                System.out.println(e);
+            }
         }
         else{
             //Display message
@@ -2289,5 +2335,139 @@ void Change_Role_Actual(String ID, String Password, String Username, String New_
 
             }
         }
+    }
+
+    String Get_Account_Data() throws SQLException {
+        String Query = "SELECT * FROM account;";
+        Connection con = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
+        Statement s = con.createStatement();
+        ResultSet rs = s.executeQuery(Query);
+
+        String Data = "";
+
+        while(rs.next()){
+            Data = Data + rs.getString("ID") + " | " + rs.getString("Username") + " | "+ rs.getString("Password") + " | " +  rs.getString("Role")+ " | " + rs.getString("Full_Name") + " | " + rs.getString("Blanks_To_Give") + "\n"; // the data from the table
+        }
+
+        return Data;
+    }
+
+    String Get_Blank_Data() throws SQLException {
+        String Query = "SELECT * FROM Blanks";
+        Connection con = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
+        Statement s = con.createStatement();
+        ResultSet rs = s.executeQuery(Query);
+
+        String Data = "";
+
+        while(rs.next()){
+            Data = Data + rs.getString("ID") +" | "+ rs.getString("Valid"); // the data from the table
+        }
+
+        return Data;
+    }
+
+    String Get_Ticket_Data() throws SQLException {
+        String Query = "SELECT * FROM Ticket;";
+        Connection con = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
+        Statement s = con.createStatement();
+        ResultSet rs = s.executeQuery(Query);
+
+        String Data = "";
+
+        while(rs.next()){
+            Data = Data + rs.getString("Ticket_ID") +" | "+ rs.getString("Currency_Purchesed") +" | " + rs.getString("Amount") +" | " + rs.getString("Date_Purchased") +" | " +rs.getString("Customer_Purchased_ID") +" | " +rs.getString("To_Location") +" | " +rs.getString("From_Location") +" | " +rs.getString("Seller_ID") +" | " +rs.getString("Seat_Location") +" | " +rs.getString("Blank") +" | " +rs.getString("Valid")+ "\n"; // the data from the table
+        }
+
+        return Data;
+    }
+
+    String Get_Customer_Data() throws SQLException {
+        String Query = "SELECT * FROM Customer;";
+        Connection con = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
+        Statement s = con.createStatement();
+        ResultSet rs = s.executeQuery(Query);
+
+
+        String Data = "";
+
+        while(rs.next()){
+            Data = Data + rs.getString("ID") +" | "+ rs.getString("Name")+ rs.getString("Email") +" | "+ rs.getString("Discout") +" | "+ rs.getString("Flex_Or_Fixed" )+ "\n"; // data from the table
+        }
+
+        return Data;
+    }
+
+    @FXML
+    void Manager_Get_Account_Data(ActionEvent event) throws SQLException {
+        Manager_Data_Output.setText(Get_Account_Data());
+        Manager_Data_Output.setVisible(true);
+    }
+
+    @FXML
+    void Manager_Get_Blank_Data(ActionEvent event) throws SQLException {
+        Manager_Data_Output.setText(Get_Blank_Data());
+        Manager_Data_Output.setVisible(true);
+    }
+
+    @FXML
+    void Manager_Get_Customer_Data(ActionEvent event) throws SQLException {
+        Manager_Data_Output.setText(Get_Customer_Data());
+        Manager_Data_Output.setVisible(true);
+    }
+
+    @FXML
+    void Manager_Get_Ticket_Data(ActionEvent event) throws SQLException {
+        Manager_Data_Output.setText(Get_Ticket_Data());
+        Manager_Data_Output.setVisible(true);
+    }
+
+    // Admin_Data_Output
+
+    @FXML
+    void Admin_Get_Account_Data(ActionEvent event) throws SQLException {
+        Admin_Data_Output.setText(Get_Account_Data());
+        Admin_Data_Output.setVisible(true);
+    }
+
+    @FXML
+    void Admin_Get_Blank_Data(ActionEvent event) throws SQLException {
+        Admin_Data_Output.setText(Get_Blank_Data());
+        Admin_Data_Output.setVisible(true);
+    }
+
+    @FXML
+    void Admin_Get_Customer_Data(ActionEvent event) throws SQLException {
+        Admin_Data_Output.setText(Get_Customer_Data());
+        Admin_Data_Output.setVisible(true);
+    }
+
+    @FXML
+    void Admin_Get_Ticket_Data(ActionEvent event) throws SQLException {
+        Admin_Data_Output.setText(Get_Ticket_Data());
+        Admin_Data_Output.setVisible(true);
+    }
+
+    /*
+    @FXML
+    private Button Admin_Go_To_Backup_System_Button;
+     */
+
+    @FXML
+    void Admin_Go_To_Backup_System(ActionEvent event) throws IOException {
+        String file = "System-Admin-Backup-System.fxml";
+        Change_Scene(event, file);
+    }
+
+    @FXML
+    void Admin_Go_To_Manage_Reports(ActionEvent event) throws IOException {
+        String file = "System-Admin-Generate-Report.fxml";
+        Change_Scene(event, file);
+    }
+
+    @FXML
+    void Admin_Go_To_Manage_Tickets(ActionEvent event) throws IOException {
+        String file = "System-Admin-Manage-Tickets-Void-Ticket.fxml";
+        Change_Scene(event, file);
     }
 }
