@@ -1315,7 +1315,7 @@ public class HelloController {
 
         if (Check_SQL_Injection(Check) && Check_Account_Exists(Account_ID)){
             try {
-                String Query = "SELECT * FROM accounts where ID = \""+ Account_ID +"\""; // Add SQL injection protection, make sure that blank exists
+                String Query = "SELECT * FROM account where ID = \""+ Account_ID +"\""; // Add SQL injection protection, make sure that blank exists
                 Connection con = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
                 Statement s = con.createStatement();
                 ResultSet rs = s.executeQuery(Query);
@@ -1342,7 +1342,7 @@ public class HelloController {
 
     boolean Check_Account_Exists(String Account_ID) throws SQLException {
         try{
-            String Query = "SELECT * FROM accounts where ID = \""+ Account_ID +"\""; // Add SQL injection protection, make sure that blank exists
+            String Query = "SELECT * FROM account where ID = \""+ Account_ID +"\""; // Add SQL injection protection, make sure that blank exists
             Connection con = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery(Query);
@@ -1391,7 +1391,7 @@ public class HelloController {
 
     boolean Check_Password(String ID, String Password){
         try{
-            String Query = "SELECT * FROM accounts where ID = \""+ ID +"\""; // Add SQL injection protection, make sure that blank exists
+            String Query = "SELECT * FROM account where ID = \""+ ID +"\""; // Add SQL injection protection, make sure that blank exists
             Connection con = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery(Query);
@@ -1571,7 +1571,7 @@ void Change_Role_Actual(String ID, String Password, String Username, String New_
         String[] Data = {ID, Password};
 
         if (Check_SQL_Injection(Data) && Check_Account_Exists(ID)){
-            String Query = "SELECT * FROM accounts where Password = \""+ Password +"\" AND ID = \""+ ID +"\";"; // Add SQL injection protection, make sure that blank exists
+            String Query = "SELECT * FROM account where Password = \""+ Password +"\" AND ID = \""+ ID +"\";"; // Add SQL injection protection, make sure that blank exists
             Connection con = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery(Query);
