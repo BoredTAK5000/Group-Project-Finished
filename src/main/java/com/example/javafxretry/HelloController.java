@@ -1420,6 +1420,7 @@ public class HelloController {
         Change_Role_Actual(ID, Password, Username, New_Role);
     }
 void Change_Role_Actual(String ID, String Password, String Username, String New_Role) throws SQLException {
+    New_Role = New_Role.toUpperCase();
     String[] Data = {ID, Password, Username, New_Role};
 
     if (Check_SQL_Injection(Data) &&  Check_Account_Exists(ID)){
