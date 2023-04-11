@@ -1138,12 +1138,13 @@ public class HelloController {
         String ID = "";
         Random random = new Random();
         for (int i = 0; i < 8; i++) {
-            int j = random.nextInt();
-            while (j < 52) {
+            int j = random.nextInt(52);
+            while (!(j < 52)) {
                 j = random.nextInt(52);
             }
             ID = ID + Characters[j];
         }
+        System.out.println("ID created");
         return ID;
     }
 
@@ -1346,7 +1347,7 @@ public class HelloController {
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery(Query);
             rs.next();
-            if (rs.getString("ID") == ""){
+            if (rs.getString("ID").equals("")){
                 return false;
             }
             else{
@@ -1462,24 +1463,19 @@ void Change_Role_Actual(String ID, String Password, String Username, String New_
         String[] Data = {Full_Name, Username, Role, Agency, Password};
         String ID = "";
         try {
-            if (Check_Account_Doesnt_Exist(Password) && Check_SQL_Injection(Data) && Phone_Number2.length() == 8){
+            if (Check_Account_Doesnt_Exist(Password) && Check_SQL_Injection(Data) && Phone_Number2.length() < 11){
                 if(Role.toUpperCase().equals("MANAGER") || Role.toUpperCase().equals("ADMIN") || Role.toUpperCase().equals("ADVISOR")){
                     boolean valid = false;
-                    while (valid){
+                    while (!valid){
                         ID = Create_ID();
-                        String Query = "SELECT * FROM account WHERE ID = \""+ID+"\";";
-                        Connection con = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
-                        Statement s = con.createStatement();
-                        ResultSet rs = s.executeQuery(Query);
-                        rs.next();
-                        if(rs.getString("ID").equals("")){
-                            valid = true;
-                        }
+                        valid = Check_Valid_ID(ID);
+
                     }
-                    String Query = "INSERT INTO account(\"ID\", \"Username\", \"Password\", \"Role\", \"Full_Name\", \"telephone\", \"Agency\" ) VALUES (\""+ID+"\", \""+Username+"\", \""+Password+"\", \""+Role+"\", \""+Full_Name+"\", \""+Phone_Number1+"\", \""+Agency+"\")";
+                    String Query = "INSERT INTO account(ID, Username, Password, Role, Full_Name, telephone, Agency) VALUES (\""+ID+"\", \""+Username+"\", \""+Password+"\", \""+Role+"\", \""+Full_Name+"\", \""+Phone_Number1+"\", \""+Agency+"\")";
                     Connection con = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
                     Statement s = con.createStatement();
                     s.executeUpdate(Query);
+                    System.out.println("Account created");
                 }
                 else{
                     //Display message
@@ -1496,24 +1492,59 @@ void Change_Role_Actual(String ID, String Password, String Username, String New_
 
     }
 
-    boolean Check_Account_Doesnt_Exist(String Password){
+    boolean Check_Valid_ID(String ID){
         try{
-            String Query = "SELECT * FROM accounts where Password = \""+ Password +"\""; // Add SQL injection protection, make sure that blank exists
+            String Query = "SELECT * FROM account WHERE ID = \""+ID+"\";";
             Connection con = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery(Query);
             rs.next();
-            if (rs.getString("ID") == ""){
+            if(rs.getString("ID").equals("")){
+
+            }
+            return false;
+        }
+        catch (Exception e){
+            if(e.toString().equals("java.sql.SQLException: Illegal operation on empty result set.")){
                 return true;
             }
             else{
+                System.out.println(e);
                 return false;
             }
+
         }
-        catch (Exception e){
-            System.out.println(e);
+    }
+
+
+    boolean Check_Account_Doesnt_Exist(String Password){
+        try {
+            System.out.println(Password);
+            String Query = "SELECT * FROM account where Password = \""+ Password +"\""; // Add SQL injection protection, make sure that blank exists
+            Connection con = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery(Query);
+            rs.next();
+            if(rs.getString("ID").equals("")){
+
+            }
+            System.out.println("Problem");
+            System.out.println(rs);
+
             return false;
         }
+        catch (Exception e){
+            if(e.toString().equals("java.sql.SQLException: Illegal operation on empty result set.")){
+                System.out.println("No Problem");
+                return true;
+
+            }
+            else{
+                System.out.println(e);
+            }
+        }
+        System.out.println("wtf");
+        return false;
     }
 
     @FXML
