@@ -1617,23 +1617,21 @@ void Change_Role_Actual(String ID, String Password, String Username, String New_
 
         try{
             Phone_Number = Integer.valueOf(Customer_Phone_Number.getText());
+            Create_Customer_Actual(City, Country, Discount, Email, Name, Postcode, Phone_Number);
         }
         catch (Exception e){
             // Display Message
         }
-
-
-
     }
 
     void Create_Customer_Actual(String City, String Country, String Discount, String Email, String Name, String Postcode, int Phone_Number) throws SQLException {
         boolean Valid = true;
         String[] Data = {City, Country, Email, Name, Postcode, Discount};
 
-        if (Flex_Or_Fixed_Discount.getText().toUpperCase().equals("FIXED")){
+        if (Discount.toUpperCase().equals("FIXED")){
             Valid = true;
         }
-        else if (Flex_Or_Fixed_Discount.getText().toUpperCase().equals("FLEXED")) {
+        else if (Discount.toUpperCase().equals("FLEXED")) {
             Valid = true;
         }
         else{
@@ -1650,9 +1648,9 @@ void Change_Role_Actual(String ID, String Password, String Username, String New_
             ID = "";
             Random random = new Random();
             for (int i = 0; i < 8; i++){
-                int j = random.nextInt();
-                while (j < 52){
-                    j = random.nextInt();
+                int j = random.nextInt(52);
+                while (!(j < 52)){
+                    j = random.nextInt(52);
                 }
                 ID = ID + Characters[j];
             }
@@ -1665,13 +1663,13 @@ void Change_Role_Actual(String ID, String Password, String Username, String New_
             }
         }
 
-        if (Check_SQL_Injection(Data) || Valid){
+        if (Check_SQL_Injection(Data) && Valid){
             String Query = "SELECT * FROM Customers WHERE ID = \" "+ID+" \" ";
             Connection con = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery(Query);
             if(rs.getString(Email).equals("")){
-                Query = "INSERT INTO Customer VALUES (\""+ID+"\", \""+Name+"\", \""+Email+"\", \""+Postcode+"\", \""+City+"\", \""+Country+"\")";
+                Query = "INSERT INTO Customer VALUES (\""+ID+"\", \""+Name+"\", \""+Email+"\", \""+Postcode+"\", \""+City+"\", \""+Country+"\" , "+Phone_Number+")";
                 System.out.println(Query);
                 Connection con1 = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
                 Statement s1 = con1.createStatement();
