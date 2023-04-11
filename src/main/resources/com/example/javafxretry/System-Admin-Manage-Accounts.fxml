@@ -47,7 +47,7 @@
             <Font size="36.0" />
          </font>
       </Text>
-      <Button fx:id="Manager_Create_Customer_Cancel_Button" layoutX="794.0" layoutY="531.0" mnemonicParsing="false" onAction="#Manager_Cancel" prefHeight="81.0" prefWidth="178.0" text="Cancel">
+      <Button fx:id="Manager_Create_Customer_Cancel_Button" layoutX="794.0" layoutY="531.0" mnemonicParsing="false" onAction="#Admin_Cancel" prefHeight="81.0" prefWidth="178.0" text="Cancel">
          <font>
             <Font size="30.0" />
          </font>
