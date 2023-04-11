@@ -2071,7 +2071,7 @@ void Change_Role_Actual(String ID, String Password, String Username, String New_
 
     @FXML
     void Manager_Go_To_Alter_Account(ActionEvent event) throws IOException {
-        String file = "Office-Manager-Manage-Accounts.fxml";
+        String file = "Office-Manager-Manage-Accounts-Alter.fxml";
         Change_Scene(event, file);
     }
 
