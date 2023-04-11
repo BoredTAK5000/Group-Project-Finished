@@ -515,6 +515,9 @@ public class HelloController {
     @FXML
     private Button Manager_Go_To_Generate_Custom_Report_Button;
 
+    @FXML
+    private Button Manager_Generate_Report_Cancel_Button;
+
     //-- Custom Report ------------------------------------------------------------------------------------------------------------------------------------------------
 
     //   TO-DO
