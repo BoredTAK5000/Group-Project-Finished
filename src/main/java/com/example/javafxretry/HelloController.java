@@ -1610,8 +1610,13 @@ public class HelloController {
 
     @FXML
     void Manager_Go_To_Manager_Customer(ActionEvent event) throws IOException {
-        String file = "Office-Manager-Manage-Customers.fxml";
-        Change_Scene(event, file);
+        try {
+            String file = "Office-Manager-Manage-Customers.fxml";
+            Change_Scene(event, file);
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
     }
 
     @FXML
@@ -1842,12 +1847,6 @@ public class HelloController {
     @FXML
     void Manager_Go_To_Refund_Ticket(ActionEvent event) throws IOException {
         String file = "Office-Manager-Cancel-Ticket.fxml";
-        Change_Scene(event, file);
-    }
-
-    @FXML
-    void Manager_Go_To_View_Past_Reports(ActionEvent event) throws IOException {
-        String file = "Office-Manager-View-Past-Reports.fxml";
         Change_Scene(event, file);
     }
 
@@ -2530,6 +2529,12 @@ public class HelloController {
     @FXML
     void Manager_Go_To_Manage_Accounts(ActionEvent event) throws IOException {
         String file = "Office-Manager-Manage-Accounts.fxml";
+        Change_Scene(event, file);
+    }
+
+    @FXML
+    void Manager_Go_To_Alter_Customer_Account(ActionEvent event) throws IOException{
+        String file = "Office-Manager-Manage-Customers-Alter-Account.fxml";
         Change_Scene(event, file);
     }
 }
