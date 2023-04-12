@@ -1019,13 +1019,13 @@ public class HelloController {
         boolean Recever_ID_Exists;
         boolean Blank_ID_Exists;
 
-        String Query1 = "SELECT * FROM Blanks WHERE ID = \"" + Blank_ID + "\";";
+        String Query1 = "SELECT * FROM Blanks WHERE Blank_ID = \"" + Blank_ID + "\";";
         String Query2 = "SELECT * FROM account WHERE ID = \"" + Recever_ID + "\";";
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29", "in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
             Statement s = con.createStatement();
-
             ResultSet rs1 = s.executeQuery(Query1);
+
             rs1.next();
             if (rs1.getString("Blank_ID").equals("")) {
                 // display message
@@ -1045,18 +1045,30 @@ public class HelloController {
 
             if (Recever_ID_Exists && Blank_ID_Exists) {
                 if (rs2.getString("Blanks_To_Give").equals("")) {
-                    String Query3 = "UPDATE account SET Blanks_To_Give = \"" + Recever_ID + "\"";
-                    s.executeUpdate(Query3);
-                    //ResultSet rs = s.executeQuery(Query3);
-                } else {
-                    String Previous_Blanks = rs2.getString("Blanks_To_Give");
-                    String Query3 = "UPDATE account SET Blanks_To_Give = \"" + Previous_Blanks + Blank_ID + "\"";
-                    s.executeUpdate(Query3);
+
                     //ResultSet rs = s.executeQuery(Query3);
                 }
+                String Previous_Blanks = rs2.getString("Blanks_To_Give");
+                String Query3 = "UPDATE account SET Blanks_To_Give = \"" + Previous_Blanks+ ", " + Blank_ID + "\" WHERE ID = \"" + Recever_ID + "\"";
+                s.executeUpdate(Query3);
+                //ResultSet rs = s.executeQuery(Query3);
+
             }
         } catch (Exception e) {
-            System.out.println(e);
+            if (e.toString().equals("java.lang.NullPointerException: Cannot invoke \"String.equals(Object)\" because the return value of \"java.sql.ResultSet.getString(String)\" is null")){
+                try{
+                    Connection con = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29", "in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
+                    Statement s = con.createStatement();
+                    String Query3 = "UPDATE account SET Blanks_To_Give = \""+Blank_ID+"\" WHERE ID = \"" + Recever_ID + "\"";
+                    s.executeUpdate(Query3);
+
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+            else{
+                System.out.println(e);
+            }
         }
     }
 
@@ -1422,26 +1434,26 @@ public class HelloController {
 
         Change_Role_Actual(ID, Password, Username, New_Role);
     }
-void Change_Role_Actual(String ID, String Password, String Username, String New_Role) throws SQLException {
-    New_Role = New_Role.toUpperCase();
-    String[] Data = {ID, Password, Username, New_Role};
+    void Change_Role_Actual(String ID, String Password, String Username, String New_Role) throws SQLException {
+        New_Role = New_Role.toUpperCase();
+        String[] Data = {ID, Password, Username, New_Role};
 
-    if (Check_SQL_Injection(Data) &&  Check_Account_Exists(ID)){
-        if (Check_Password(ID, Password)){
-            String Query = "UPDATE account SET Role = \""+New_Role+" \" WHERE ID =\""+ID+"\"";
-            Connection con = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
-            Statement s = con.createStatement();
-            s.executeUpdate(Query);
-            //ResultSet rs = s.executeQuery(Query);
+        if (Check_SQL_Injection(Data) &&  Check_Account_Exists(ID)){
+            if (Check_Password(ID, Password)){
+                String Query = "UPDATE account SET Role = \""+New_Role+" \" WHERE ID =\""+ID+"\"";
+                Connection con = DriverManager.getConnection("jdbc:mysql://smcse-stuproj00.city.ac.uk:3306/in2018g29","in2018g29_d", "vtF1zs6O"); // "jdbc:mysql://localhost:3306/in2018g29","in2018g29_d", "vtF1zs6O" "jdbc:mysql://hostname:port/dbname","username", "password"
+                Statement s = con.createStatement();
+                s.executeUpdate(Query);
+                //ResultSet rs = s.executeQuery(Query);
+            }
+            else{
+                //Display message
+            }
         }
         else{
-            //Display message
+            //Display Message
         }
     }
-    else{
-        //Display Message
-    }
-}
 
     @FXML
     void Admin_Create_Account(ActionEvent event) {
@@ -1519,7 +1531,6 @@ void Change_Role_Actual(String ID, String Password, String Username, String New_
 
         }
     }
-
 
     boolean Check_Account_Doesnt_Exist(String Password){
         try {
@@ -2497,11 +2508,6 @@ void Change_Role_Actual(String ID, String Password, String Username, String New_
         Admin_Data_Output.setText(Get_Ticket_Data());
         Admin_Data_Output.setVisible(true);
     }
-
-    /*
-    @FXML
-    private Button Admin_Go_To_Backup_System_Button;
-     */
 
     @FXML
     void Admin_Go_To_Backup_System(ActionEvent event) throws IOException {
